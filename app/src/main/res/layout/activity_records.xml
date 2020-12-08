@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity_Main">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/purple_200"
+        android:backgroundTintMode="src_in"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:paddingRight="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/score_LBL_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="50dp"
+                android:text="Top 10 Records"
+                android:textStyle="bold"
+                android:textSize="42dp"
+                android:textColor="#FFFFFFFF" />
+
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="30dp">
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/list_entry_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="sfrf"
+                android:textSize="20dp" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/list_entry_summary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="sfdfsf"
+                android:textSize="10dp" >
+            </TextView>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+</RelativeLayout>
+

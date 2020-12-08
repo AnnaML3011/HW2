@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity_Main">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/blacknwhite2"
+        android:backgroundTintMode="src_in"
+        android:orientation="vertical">
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:paddingRight="20dp"
+            android:orientation="vertical">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="70dp"
+                android:indeterminate="false"
+                android:max="26"
+                android:minHeight="50dp"
+                android:minWidth="200dp"
+                android:progress="1" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="30dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/score_LBL_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="Score: 0"
+                    android:textStyle="bold"
+                    android:textSize="24dp"
+                    android:textColor="#FFFFFFFF" />
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:padding="3dp"
+                    android:src="@drawable/player1" />
+            </LinearLayout>
+
+
+            <ImageView
+                android:id="@+id/first_IMG_card"
+                android:layout_width="match_parent"
+                android:layout_height="260dp"
+                android:layout_marginLeft="120dp"
+                android:layout_marginTop="10dp"
+                android:padding="20dp"
+                android:src="@drawable/backward_card" />
+
+        </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:layout_marginLeft="170dp"
+        android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/start_game_BTN"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@color/cardview_shadow_end_color"
+                android:scaleType="fitXY"
+                android:clickable="true"
+                android:src="@drawable/play">
+
+            </ImageButton>
+
+    </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:paddingRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="30dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/score_LBL_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="Score: 0"
+                    android:textStyle="bold"
+                    android:textSize="24dp"
+                    android:textColor="#FFFFFFFF" />
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:padding="3dp"
+                    android:src="@drawable/player2" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/seconed_IMG_card"
+                android:layout_width="match_parent"
+                android:layout_height="260dp"
+                android:layout_marginLeft="120dp"
+                android:layout_marginTop="10dp"
+                android:padding="20dp"
+                android:src="@drawable/backward_card" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
