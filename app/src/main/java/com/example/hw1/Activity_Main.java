@@ -3,22 +3,30 @@ package com.example.hw1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.donkey.dolly.Dolly;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 /*
 Anna Meleshko -319346045
  */
 public class Activity_Main extends AppCompatActivity {
-
+    public static final String NAME = "NAME";
     private final int NUM_OF_PLAYERS = 2;
     private final int NUM_OF_CARDS = 52;
     private List<Card> cards;
@@ -28,7 +36,44 @@ public class Activity_Main extends AppCompatActivity {
     private ImageButton start_game_BTN;
     private ImageView first_IMG_card;
     private ImageView second_IMG_card;
+    private ProgressBar progress_Bar;
+    private int progressStatus = 0;
+    private Timer timer;
+    private TimerTask timerTask;
+    final private Handler handler = new Handler();
+    final private int delay = 200;
+    private boolean isKilled = false;
+    private MediaPlayer mp;
 
+
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            if(players.get(0).getCardDeck().deckIsEmpty() == 0 || players.get(1).getCardDeck().deckIsEmpty() == 0){
+                isKilled = true;
+                stopTimer();
+                checkWinner();
+            }
+            if(!isKilled){
+                start_game();
+            }
+        }
+    };
+
+    private void setImage(int id, ImageView imageView){
+        Glide
+                .with(this)
+                .load(id)
+                .into(imageView);
+    }
+
+
+    private void changeCardImg(){
+//        setImage(R.drawable.backward_card, first_IMG_card);
+//        setImage(R.drawable.backward_card, second_IMG_card);
+        first_IMG_card.setImageResource(R.drawable.backward_card);
+        second_IMG_card.setImageResource(R.drawable.backward_card);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,18 +103,24 @@ public class Activity_Main extends AppCompatActivity {
     protected void onPause() {
         Log.d("aaa","onPause");
         super.onPause();
+        handler.removeCallbacks(runnable);
+
     }
 
     @Override
     protected void onStop() {
         Log.d("aaa","onStop");
         super.onStop();
+        handler.removeCallbacks(runnable);
+
     }
 
     @Override
     protected void onDestroy() {
         Log.d("aaa","onDestroy");
         super.onDestroy();
+        handler.removeCallbacks(runnable);
+
     }
 
     private void findViews() {
@@ -78,27 +129,66 @@ public class Activity_Main extends AppCompatActivity {
         start_game_BTN = findViewById(R.id.start_game_BTN);
         first_IMG_card = findViewById(R.id.first_IMG_card);
         second_IMG_card =findViewById(R.id.seconed_IMG_card);
+        progress_Bar = findViewById(R.id.progress_Bar);
 
     }
 
+    protected void playSound(int rawName) {
+
+        mp = MediaPlayer.create(this, rawName);
+        mp.setOnCompletionListener(mp -> {
+            mp.reset();
+            mp.release();
+        });
+        mp.start();
+    }
+
+    //To start timer
+    private void startTimer(){
+        timer = new Timer();
+        timerTask = new TimerTask() {
+            public void run() {
+                changeCardImg();
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                handler.post(runnable);
+
+            }
+        };
+        timer.schedule(timerTask, 1000, 1000);
+    }
+
+
+    /*to stop timer*/
+    private void stopTimer(){
+        if(timer != null){
+            timer.cancel();
+            timer.purge();
+        }
+    }
+
+    /*
+   press the button once, and than start a timer to until the deck is empty
+    */
     private void initViews() {
         score_LBL_1.setText("Score: " + players.get(0).getScore());
         score_LBL_2.setText("Score: " + players.get(1).getScore());
-    /*
-    on each click if we still have cards to pop,  call the function 'start game'.
-     */
         start_game_BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(players.get(0).getCardDeck().deckIsEmpty() == 0 || players.get(1).getCardDeck().deckIsEmpty() == 0){
-                    Log.d("aaa","true");
-                    checkWinner();
-                }else {
-                    start_game();
-                }
+                playSound(R.raw.click);
+                start_game_BTN.setImageResource(R.drawable.stopwatch);
+                    if(!isKilled) {
+                        startTimer();
+                    }
             }
         });
     }
+
+
     /*
     Create Cards from Enums (4 types*14 values = 52 cards).
      */
@@ -110,6 +200,7 @@ public class Activity_Main extends AppCompatActivity {
             }
         }
     }
+
     /*
        Create players as in the enum(player1,player2)
      */
@@ -119,6 +210,7 @@ public class Activity_Main extends AppCompatActivity {
             players.add(new Player(player));
         }
     }
+
     /*
        shuffle the cards and for each player put half of the deck.
      */
@@ -133,31 +225,29 @@ public class Activity_Main extends AppCompatActivity {
         }
     }
 
-    private void showCards(){
-        for(Card card : cards){
-           // System.out.println(card);
-        }
-    }
-    private void showPlayers(){
-        for(Player player : players){
-           // System.out.println(player);
-        }
-    }
     /*
        pop cards for each player for their deck(26 cards),
         find image of that specific card, and than go check and caclcute the score.
      */
     private void start_game() {
+        playSound(R.raw.flipcard);
+        if(progressStatus <NUM_OF_CARDS/NUM_OF_PLAYERS) {
+            progressStatus += 1;
+            progress_Bar.setProgress(progressStatus);
+        }
         Card card1 = players.get(0).getCardDeck().getCard();
         Card card2 = players.get(1).getCardDeck().getCard();
         String nameCard1 = card1.getType() + "_" + card1.getValue();
         String nameCard2 = card2.getType() + "_" + card2.getValue();
         int id1 = getResources().getIdentifier(nameCard1,"drawable", getPackageName());
         int id2 = getResources().getIdentifier(nameCard2,"drawable", getPackageName());
+//        setImage(id1, first_IMG_card);
+//        setImage(id2, second_IMG_card);
         first_IMG_card.setImageResource(id1);
         second_IMG_card.setImageResource(id2);
         calculateScore(card1, card2);
     }
+
     /*
        check which player got higher card, add points to the player with the higher card value,
        if both have the same value - add point to both of them.
@@ -178,6 +268,7 @@ public class Activity_Main extends AppCompatActivity {
              score_LBL_2.setText("Score: " + players.get(1).getScore());
          }
      }
+
         /*
            check which player have higher final score, and go for next activity to show the winner.
          */

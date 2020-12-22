@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/black"
+        android:backgroundTintMode="src_in"
+        android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/score_LBL_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
+                android:text="Top 10 Records"
+                android:textStyle="bold"
+                android:fontFamily="casual"
+                android:textSize="45dp"
+                android:textColor="@color/purple_300" />
+
+            <FrameLayout
+                android:id="@+id/main_LAY_list"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_margin="24dp"
+                android:background="@color/beige"/>
+
+            <FrameLayout
+                android:id="@+id/main_LAY_map"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_margin="24dp"
+                android:background="@color/beige"/>
+
+        <Button
+                android:id="@+id/go_main_menu_BTN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Close"
+                android:layout_gravity="center"
+                android:textSize="20dp"
+                android:background="@color/purple_200"
+                android:textColor="@color/black"
+                android:layout_marginBottom="10dp"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
+
