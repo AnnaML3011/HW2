@@ -44,6 +44,7 @@ public class Activity_Main extends AppCompatActivity {
     final private int delay = 200;
     private boolean isKilled = false;
     private MediaPlayer mp;
+    private boolean firstGame = true;
 
 
     private Runnable runnable = new Runnable() {
@@ -87,10 +88,35 @@ public class Activity_Main extends AppCompatActivity {
 
     }
 
+    /*
+press the button once, and than start a timer to until the deck is empty
+ */
+    private void initViews() {
+        timer = new Timer();
+        score_LBL_1.setText("Score: " + players.get(0).getScore());
+        score_LBL_2.setText("Score: " + players.get(1).getScore());
+        start_game_BTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                firstGame = false;
+                playSound(R.raw.click);
+                start_game_BTN.setImageResource(R.drawable.stopwatch);
+                if(!isKilled) {
+                    startTimer(timer);
+                }
+            }
+        });
+    }
+
+
     @Override
     protected void onStart() {
         Log.d("aaa","onStart");
         super.onStart();
+        if(!firstGame) {
+            timer = new Timer();
+            startTimer(timer);
+        }
     }
 
     @Override
@@ -103,6 +129,7 @@ public class Activity_Main extends AppCompatActivity {
     protected void onPause() {
         Log.d("aaa","onPause");
         super.onPause();
+        stopTimer();
         handler.removeCallbacks(runnable);
 
     }
@@ -111,6 +138,7 @@ public class Activity_Main extends AppCompatActivity {
     protected void onStop() {
         Log.d("aaa","onStop");
         super.onStop();
+        stopTimer();
         handler.removeCallbacks(runnable);
 
     }
@@ -119,6 +147,7 @@ public class Activity_Main extends AppCompatActivity {
     protected void onDestroy() {
         Log.d("aaa","onDestroy");
         super.onDestroy();
+        stopTimer();
         handler.removeCallbacks(runnable);
 
     }
@@ -144,8 +173,8 @@ public class Activity_Main extends AppCompatActivity {
     }
 
     //To start timer
-    private void startTimer(){
-        timer = new Timer();
+    private void startTimer(Timer timer){
+//        timer = new Timer();
         timerTask = new TimerTask() {
             public void run() {
                 changeCardImg();
@@ -168,24 +197,6 @@ public class Activity_Main extends AppCompatActivity {
             timer.cancel();
             timer.purge();
         }
-    }
-
-    /*
-   press the button once, and than start a timer to until the deck is empty
-    */
-    private void initViews() {
-        score_LBL_1.setText("Score: " + players.get(0).getScore());
-        score_LBL_2.setText("Score: " + players.get(1).getScore());
-        start_game_BTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                playSound(R.raw.click);
-                start_game_BTN.setImageResource(R.drawable.stopwatch);
-                    if(!isKilled) {
-                        startTimer();
-                    }
-            }
-        });
     }
 
 
