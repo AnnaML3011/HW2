@@ -26,6 +26,8 @@ import java.util.TimerTask;
 Anna Meleshko -319346045
  */
 public class Activity_Main extends AppCompatActivity {
+    final private Handler handler = new Handler();
+    final private int delay = 200;
     public static final String NAME = "NAME";
     private final int NUM_OF_PLAYERS = 2;
     private final int NUM_OF_CARDS = 52;
@@ -40,8 +42,6 @@ public class Activity_Main extends AppCompatActivity {
     private int progressStatus = 0;
     private Timer timer;
     private TimerTask timerTask;
-    final private Handler handler = new Handler();
-    final private int delay = 200;
     private boolean isKilled = false;
     private MediaPlayer mp;
     private boolean firstGame = true;

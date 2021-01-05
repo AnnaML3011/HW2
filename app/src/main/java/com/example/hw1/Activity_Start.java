@@ -11,17 +11,12 @@ import android.location.LocationManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 
-import com.bumptech.glide.Glide;
 
 public class Activity_Start extends Activity {
 
@@ -29,7 +24,7 @@ public class Activity_Start extends Activity {
     private Button go_LeaderBoard_BTN;
     private LinearLayout main_Background;
     private MediaPlayer mp;
-    LocationManager locationManager;
+    private LocationManager locationManager;
 
 
     @Override
@@ -40,6 +35,7 @@ public class Activity_Start extends Activity {
         initViews();
         checkGPS();
     }
+
     protected void playSound(int rawName) {
         mp = MediaPlayer.create(this, rawName);
         mp.setOnCompletionListener(mp -> {

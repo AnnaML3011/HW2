@@ -22,7 +22,7 @@ public class Fragment_Map extends Fragment implements OnMapReadyCallback {
     private GoogleMap mMap;
     private double dLatitude = 0.0;
     private double dLongtitude = 0.0;
-    final int ZOOM = 15;
+    private final int ZOOM = 15;
 
 
     @Override

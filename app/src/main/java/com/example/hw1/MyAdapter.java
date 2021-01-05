@@ -1,13 +1,10 @@
 package com.example.hw1;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 
@@ -15,7 +12,7 @@ public class MyAdapter extends ArrayAdapter<Record>{
 
     private final Context context;
     private final TopTenRecords tenRecords;
-    int resource;
+    private int resource;
     private Record record = new Record();
 
 

@@ -26,14 +26,6 @@ public class TopTenRecords implements Serializable {
     public Record getRecord(int i){
         return records.get(i);
     }
-//
-//    public int getRecordsScore(){
-//        return record.getScore();
-//    }
-//
-//    public String getRecordsDate(){
-//        return record.getDate();
-//    }
 
     public void setRecords(ArrayList<Record> records) {
         this.records = records;

@@ -21,8 +21,9 @@ public class Activity_Leader_Board extends AppCompatActivity implements Fragment
     private double lng = 0.0;
     private int lastPlaceScore;
     private TopTenRecords tenRecords;
-    Fragment_List fragmentList;
-    Fragment_Map fragment_map;
+    private Fragment_List fragmentList;
+    private Fragment_Map fragment_map;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_leader_board);
@@ -36,20 +37,9 @@ public class Activity_Leader_Board extends AppCompatActivity implements Fragment
             tenRecords = new Gson().fromJson(record, TopTenRecords.class);
             Collections.sort(tenRecords.getRecords(), Record.RecordComperator);
             Bundle bundle = new Bundle();
-            Log.d("pppttttttt", "" + tenRecords.getRecords().size());
-
             bundle.putInt("numOfRecords", tenRecords.getRecords().size());
             for (int i = 0; i < tenRecords.getRecords().size(); i++) {
-                name = tenRecords.getRecords().get(i).getName();
-                score = tenRecords.getRecords().get(i).getScore();
-                lng = tenRecords.getRecords().get(i).getLng();
-                lat = tenRecords.getRecords().get(i).getLat();
-//                Log.d("name+score+loc", name +"|"+score+ "|lat:" + lat +"|lng:" + lng);
-                bundle.putString(Fragment_List.NAME + i, name);
-                bundle.putInt(Fragment_List.SCORE + i, score);
-                bundle.putDouble(Fragment_List.LAT + i, lat);
-                bundle.putDouble(Fragment_List.LNG + i, lng);
-                fragmentList.setArguments(bundle);
+                getRecordDetails(i, tenRecords, bundle);
             }
         }
             getSupportFragmentManager().beginTransaction().add(R.id.main_LAY_list, fragmentList).commit();
@@ -57,6 +47,17 @@ public class Activity_Leader_Board extends AppCompatActivity implements Fragment
             initViews();
         }
 
+   private void getRecordDetails(int pos ,TopTenRecords tenRecords, Bundle bundle){
+        name = tenRecords.getRecords().get(pos).getName();
+        score = tenRecords.getRecords().get(pos).getScore();
+        lng = tenRecords.getRecords().get(pos).getLng();
+        lat = tenRecords.getRecords().get(pos).getLat();
+        bundle.putString(Fragment_List.NAME + pos, name);
+        bundle.putInt(Fragment_List.SCORE + pos, score);
+        bundle.putDouble(Fragment_List.LAT + pos, lat);
+        bundle.putDouble(Fragment_List.LNG + pos, lng);
+        fragmentList.setArguments(bundle);
+   }
 
     private void initViews() {
         go_main_menu_BTN.setOnClickListener(new View.OnClickListener() {

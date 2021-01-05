@@ -36,21 +36,20 @@ public class Activity_Winner extends Activity {
     private TextView Winner_LBL;
     private TextView Final_Score_LBL;
     private Button finish_BTN;
-    int player = 0;
-    int score = 0;
-    String playerName;
-    ImageView winner_IMG;
+    private int player = 0;
+    private int score = 0;
+    private String playerName;
+    private ImageView winner_IMG;
     private MediaPlayer mp;
     private EditText enter_LBL_name;
     private TopTenRecords tenRecords = new TopTenRecords();
     private Record record;
-    String records;
-    Location currentLocation;
+    private String records;
+    private Location currentLocation;
     private LocationCallback mLocationCallback;
     private double lng = 0.0;
     private double lat = 0.0;
     private boolean flag = false;
-
     private FusedLocationProviderClient fusedLocationProviderClient;
 
     @Override
@@ -134,28 +133,6 @@ public class Activity_Winner extends Activity {
             });
         }
     }
-
-//    private void getLastLocation() {
-//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-//                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-//            fusedLocationProviderClient.getLastLocation().addOnCompleteListener(
-//                    new OnCompleteListener<Location>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<Location> task) {
-//                            Location location = task.getResult();
-//                            if (location != null) {
-//                                flag = true;
-//                                lat = location.getLatitude();
-//                                lon = location.getLongitude();
-//                                record.setLat(lat);
-//                                record.setLon(lon);
-//                            }
-//                        }
-//                    }
-//            );
-//        }
-//    }
-
 
 
     private void requestNewLocationData() {

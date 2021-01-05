@@ -81,9 +81,7 @@ public class Fragment_List extends Fragment {
                         lat = bundle.getDouble(LAT+i, lat);
                         lng = bundle.getDouble(LNG+i, lng);
                         Record record = new Record(name, "", score, lat, lng);
-    //                    Log.d("name+score+loc", name +"|"+score+ "|lat:" + lat +"|lng:" + lng);
                         tenRecords.addRecord(record);
-    //                    Log.d("size of records", ""+tenRecords.getRecords().size());
             }
         }
         final MyAdapter adapter = new MyAdapter(getContext(), R.layout.one_record_layout, tenRecords);
